@@ -1,0 +1,32 @@
+.radio {
+  cursor: pointer;
+}
+
+.Radio .iconPath {
+  fill: none;
+  stroke: #dfdfdf;
+}
+
+.Radio:hover .iconPath {
+  fill: none;
+  stroke: #572f8c;
+}
+
+.Radio__flag:checked + svg .iconPath {
+  fill: #68d6f4;
+  stroke: none;
+}
+
+.Radio:hover .Radio__flag:checked + svg .iconPath {
+  fill: #572f8c;
+  stroke: none;
+}
+
+// input[type="radio"]+label span {
+// 	display: inline-block;
+// 	width: 19px;
+// 	height: 19px;
+// 	vertical-align: middle;
+// 	background: url("../image/print-icon-empty.png") left top no-repeat;
+// 	cursor: pointer;
+// }
