@@ -1,25 +1,25 @@
 .radio {
-	cursor: pointer;
+  cursor: pointer;
 }
 
-.radio .iconPath {
-	fill: none;
-	stroke: #dfdfdf;
+.Radio .iconPath {
+  fill: none;
+  stroke: #dfdfdf;
 }
 
-.radio:hover .iconPath {
-	fill: none;
-	stroke: #572f8c;
+.Radio:hover .iconPath {
+  fill: none;
+  stroke: #572f8c;
 }
 
-.radio:active .iconPath {
-	fill: #68d6f4;
-	stroke: none;
+.Radio__flag:checked + svg .iconPath {
+  fill: #68d6f4;
+  stroke: none;
 }
 
-.radio:active:hover .iconPath {
-	fill: #572f8c;
-	stroke: none;
+.Radio:hover .Radio__flag:checked + svg .iconPath {
+  fill: #572f8c;
+  stroke: none;
 }
 
 // input[type="radio"]+label span {
