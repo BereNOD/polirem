@@ -1,8 +1,13 @@
 import React from "react";
+import Radio from "./../components/Radio";
 
 class HomePage extends React.Component {
   render = () => {
-    return <h1>HomePage</h1>;
+    return (
+      <React.Fragment>
+        <Radio name="name" />
+      </React.Fragment>
+    );
   };
 }
 

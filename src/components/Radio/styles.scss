@@ -1,0 +1,32 @@
+.radio {
+	cursor: pointer;
+}
+
+.radio .iconPath {
+	fill: none;
+	stroke: #dfdfdf;
+}
+
+.radio:hover .iconPath {
+	fill: none;
+	stroke: #572f8c;
+}
+
+.radio:active .iconPath {
+	fill: #68d6f4;
+	stroke: none;
+}
+
+.radio:active:hover .iconPath {
+	fill: #572f8c;
+	stroke: none;
+}
+
+// input[type="radio"]+label span {
+// 	display: inline-block;
+// 	width: 19px;
+// 	height: 19px;
+// 	vertical-align: middle;
+// 	background: url("../image/print-icon-empty.png") left top no-repeat;
+// 	cursor: pointer;
+// }
