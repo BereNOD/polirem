@@ -3,4 +3,4 @@ import "./styles.scss";
 
 const Radio = ({children}) => <h2 className="nameCategory">(children)</h2>;
 
-export default Radio
+export default Radio;
