@@ -8,12 +8,14 @@ const Lists = ({
     items
 }) => (
     <React.Fragment>
-        <span className='list-inner'>{title}</span>
-        <ul className='list-item'>
-            {_.map(items, item => <li className=''>{item}</li>)}
+        <span className='list-title'>{title}</span>
+        <ul>
+            {_.map(items, item => <li className='list-item'>{item}</li>)}
         </ul>
     </React.Fragment>
 );
 
 
 export default Lists;
+
+
