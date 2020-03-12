@@ -1,0 +1,71 @@
+import React from 'react';
+import _ from 'lodash';
+import {
+	Link
+	} from "react-router-dom";
+
+import Radio from './../Radio';
+
+class Product extends React.Component {
+
+ state = {
+    activeValue: this.props.data.weights[0]
+  };
+
+  handleChange = activeValue => {
+    this.setState({ activeValue });
+  };
+
+
+	render(){
+		const { data } = this.props;
+		
+		return (
+			<div className="card col-xl-3 col-md-4 col-sm-6 col-xs-12 product-item">
+				<img className="card-img-top" src="image/product.png" alt="product" />
+				<div className="card-rating">
+					<div>
+						<img src={`image/rating-${data.rate}.png`} alt="rating"/>
+					</div>
+					{data.in_stock ? (
+						<span>
+							<img src="image/check-icon.png" alt="check" />
+							в наличии
+						</span>
+					): <span>нет в наличии</span>}
+				</div>
+				<p className="card-text">{data.title}</p>
+				<div className="row d-flex justify-content-between weight-product">
+					{Array.isArray(data.weights) ? _.map(data.weights, weight => (
+						<Radio
+            key={`Radio-${weight}`}
+            value={weight}
+            activeValue={this.state.activeValue}
+            onChange={this.handleChange}
+          >
+            {weight}
+          </Radio>
+					)) : null}
+				</div>
+				<div className=" d-flex justify-content-between price">
+					{data.sale ? (
+						<div className="discount" >
+								<img src="image/discount.png" alt="discount" />
+						</div>
+					): (<div class="d-flex align-items-center cost" >
+								<img src="image/cost.png" alt="discount" />
+							</div>)}
+					<Link to={`/${data.id}`}>
+						<div className="btn-buy">
+							<button className="btn">
+								Купить
+							</button>
+						</div>
+					</Link>
+				</div>
+			</div>
+		);
+	}
+}
+
+export default Product;
