@@ -264,6 +264,35 @@ div.search>a {
 	box-shadow: 0px 14px 20px rgba(0, 0, 0, 0.1), 0px 3px 8px rgba(0, 0, 0, 0.07);
 }
 
+.discount .price {
+	color: #dfdfdf;
+	text-decoration: line-through;
+	text-decoration-color: #fd6d6d;
+	margin-bottom: -4px;
+}
+
+.discount .sale {
+	color: #fd6d6d;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.discount .sale_discount {
+	font-size: 14px;
+}
+
+.image_sale,
+.image_price {
+	padding-left: 7px;
+	padding-bottom: 3px;
+}
+
+.price {
+
+	font-weight: bold;
+	font-size: 16px;
+}
+
 .card-rating {
 	display: flex;
 	justify-content: space-between;
@@ -277,6 +306,7 @@ div.search>a {
 
 .weight-product {
 	margin: 0;
+	margin-bottom: 20px;
 }
 
 input[type="radio"] {
@@ -314,6 +344,7 @@ input[type="radio"]:checked+label {
 	height: 35px;
 	background-color: #68D6F4;
 	border-radius: 7px;
+	color: white;
 }
 
 footer {
