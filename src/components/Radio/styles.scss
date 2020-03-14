@@ -1,23 +1,34 @@
 .Radio {
-	cursor: pointer;
-}
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
 
-.Radio .iconPath {
-	fill: none;
-	stroke: #dfdfdf;
-}
+  &__title {
+    margin-left: 5px;
+  }
 
-.Radio:hover .iconPath {
-	fill: none;
-	stroke: #572f8c;
-}
+  .iconPath {
+    fill: none;
+    stroke: #dfdfdf;
+  }
 
-.Radio__flag:checked+svg .iconPath {
-	fill: #68d6f4;
-	stroke: none;
-}
+  &:hover .iconPath {
+    fill: none;
+    stroke: #572f8c;
+  }
 
-.Radio:hover .Radio__flag:checked+svg .iconPath {
-	fill: #572f8c;
-	stroke: none;
+  &__flag:checked + svg .iconPath {
+    fill: #68d6f4;
+    stroke: none;
+  }
+
+  &__flag:checked ~ span {
+    color: #fd6d6d;
+    font-weight: 700;
+  }
+
+  &:hover &__flag:checked + svg .iconPath {
+    fill: #572f8c;
+    stroke: none;
+  }
 }
