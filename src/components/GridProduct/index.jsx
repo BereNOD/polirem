@@ -1,11 +1,11 @@
 import React from "react";
 import _ from "lodash";
-import { Link } from "react-router-dom";
-import { CartContext } from "./../../Cart";
+import { CartContext } from "../../Cart";
 
 import Radio from "./../Radio";
+import './styles.scss';
 
-class Product extends React.Component {
+class GridProduct extends React.Component {
   state = {
     activeValue: this.props.data.weights[0]
   };
@@ -98,4 +98,4 @@ class Product extends React.Component {
   }
 }
 
-export default Product;
+export default GridProduct;
