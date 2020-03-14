@@ -1,25 +1,15 @@
 import React from "react";
+import _ from "lodash";
+
+import Radio from "./../components/Radio";
+
+const weights = ["1kg", "500mg", "300mg"];
 
 import List from "./../components/List";
 
 class HomePage extends React.Component {
-  state = {
-    list: []
-  };
-
-  handleClick = () => {
-    this.setState({
-      list: [...this.state.list, this.state.list.length]
-    });
-  };
-
   render = () => {
-    return (
-      <>
-        <button onClick={this.handleClick}>Add</button>
-        <List title="HomePage" items={[this.state.list.length]} />
-      </>
-    );
+    return 'HomePage';
   };
 }
 
