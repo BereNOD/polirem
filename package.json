@@ -13,11 +13,12 @@
     "start": "webpack-dev-server --hot --mode development"
   },
   "dependencies": {
+    "bootstrap": "^4.4.1",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
-    "react-hot-loader": "^4.12.19",
-    "moment": "^2.24.0",
-    "lodash": "^4.17.15"
+    "react-hot-loader": "^4.12.19"
   },
   "devDependencies": {
     "@babel/core": "^7.8.7",
