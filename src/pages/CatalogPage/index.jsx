@@ -6,7 +6,6 @@ import Footer from './../../components/Footer';
 import mockedData from './../../CatalogMock.js';
 
 
-
 class CatalogPage extends Component {
   state = {
     productList: mockedData

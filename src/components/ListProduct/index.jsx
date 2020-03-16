@@ -20,7 +20,7 @@ class ListProduct extends React.Component {
     return (
       <CartContext.Consumer>
         {({ list, addToCart }) => (
-            <div className="row no-gutters cart">
+            <div className="row no-gutters product-item">
               <div className="col-md-2 image_cart">
                 <img src="image/product.png" className="card-img" alt="product" />
               </div>
@@ -31,11 +31,11 @@ class ListProduct extends React.Component {
                       <img src={`image/rating-${data.rate}.png`} alt="rating"/>
                     </div>
                     {data.in_stock ? (
-                      <span>
+                      <span className="stock">
                         <img src="image/check-icon.png" alt="check" />в наличии
                       </span>
                     ) : (
-                      <span>нет в наличии</span>
+                      <span className="stock">нет в наличии</span>
                     )}
                       {Array.isArray(data.weights)
                         ? _.map(data.weights, weight => (
@@ -51,7 +51,7 @@ class ListProduct extends React.Component {
                         : null}
                   </div>
 
-             <div className=" d-flex price">
+             <div className=" d-flex justify-content-between info_product">
                   <p className="card-text">{data.title}</p>
                   {data.sale ? (
                  <div className="discount">
