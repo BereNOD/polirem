@@ -21,15 +21,16 @@ class CatalogPage extends Component {
 				<Header />
 
 				<div className="container">
-						<div className="product">
-								{_.map(productList, product => (
-									<ListProduct
-										key={`Product-${product.id}`}
-										data={product}
-									/>
-								))}
-						</div>
-				</div>
+					<div className="left"></div>
+					<div className="product">
+							{_.map(productList, product => (
+								<ListProduct
+									key={`Product-${product.id}`}
+									data={product}
+								/>
+							))}
+					</div>
+			</div>
 
 				<Footer />
       

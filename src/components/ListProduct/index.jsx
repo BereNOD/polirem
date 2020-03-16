@@ -20,16 +20,15 @@ class ListProduct extends React.Component {
     return (
       <CartContext.Consumer>
         {({ list, addToCart }) => (
-          <div className="card mb-3">
-            <div className="row no-gutters">
-              <div className="col-md-3">
+            <div className="row no-gutters cart">
+              <div className="col-md-2 image_cart">
                 <img src="image/product.png" className="card-img" alt="product" />
               </div>
-              <div className="col-md-7">
+              <div className="col-md-10">
                 <div className="card-body">
-                  <div className="card-rating">
+                  <div className="cart_rating">
                     <div>
-                      <img src={`image/rating-${data.rate}.png`} alt="rating" />
+                      <img src={`image/rating-${data.rate}.png`} alt="rating"/>
                     </div>
                     {data.in_stock ? (
                       <span>
@@ -52,7 +51,7 @@ class ListProduct extends React.Component {
                         : null}
                   </div>
 
-             <div className=" d-flex justify-content-between price">
+             <div className=" d-flex price">
                   <p className="card-text">{data.title}</p>
                   {data.sale ? (
                  <div className="discount">
@@ -92,7 +91,6 @@ class ListProduct extends React.Component {
                </div></div>
                 </div>
               </div>
-            </div>
             </div>
           // <div className="card col-xl-9 product-item">
           //   <img
