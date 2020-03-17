@@ -76,14 +76,16 @@ const config = {
     }
   },
   devServer: {
-    contentBase: "./dist"
+    contentBase: "./dist",
+    historyApiFallback: true
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: require("html-webpack-template"),
       inject: false,
       appMountId: "app",
-      filename: "index.html"
+      filename: "index.html",
+      baseHref: "/"
     }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
     new LodashModuleReplacementPlugin(),
