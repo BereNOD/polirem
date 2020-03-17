@@ -3,6 +3,9 @@ import {
 Link
 } from "react-router-dom";
 
+
+import './styles.scss';
+
 const data = {
 	telephone: '+7 (4872) 71-71-71',
 	country: 'г. Тула, ул. Пузакова, 44',
