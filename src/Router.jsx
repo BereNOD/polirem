@@ -11,7 +11,10 @@ const Router = () => (
       <Route path="/" exact>
         <HomePage />
       </Route>
-      <Route path="/:id">
+      <Route path="/catalog/:categoryKey?">
+        <CatalogPage />
+      </Route>
+      <Route path="/product/:productId">
         <ProductPage />
       </Route>
     </Switch>
