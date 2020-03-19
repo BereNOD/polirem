@@ -52,7 +52,7 @@ class ListProduct extends React.Component {
                 </div>
 
                 <div className=" d-flex info_product">
-                  <p className="card-text">{data.title}</p>
+                  <p className="card-text col-md-7">{data.title}</p>
                   {data.sale ? (
                     <div className="discount">
                       <div className="price">
@@ -75,7 +75,7 @@ class ListProduct extends React.Component {
                       </div>
                     </div>
                   ) : (
-                    <div class="d-flex align-items-center cost">
+                    <div class="d-flex align-items-center cost col-md-2">
                       <span className="price">{data.price}</span>
                       <img
                         className="image_price"

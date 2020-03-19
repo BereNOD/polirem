@@ -28,7 +28,7 @@
 }
 
 .card-body p {
-  margin-bottom: 0;
+  padding-left: 0;
 }
 
 .info_product .discount,
@@ -91,8 +91,8 @@
   width: 450px;
 }
 
-.Radio {
-  margin-right: 25px;
+.cart_rating .Radio {
+  margin-left: 25px;
   &:last-child {
     margin-right: 0;
   }

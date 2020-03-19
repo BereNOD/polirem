@@ -22,7 +22,7 @@ class Product extends React.Component {
     return (
       <CartContext.Consumer>
         {({ list, addToCart }) => (
-          <div className="card col-xl-3 col-md-4 col-sm-6 col-xs-12 product-item">
+          <div className="card col-xl-4 col-md-4 col-sm-6 col-xs-12 product-item">
             <img
               className="card-img-top"
               src="image/product.png"

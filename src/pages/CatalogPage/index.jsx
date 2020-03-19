@@ -6,6 +6,8 @@ import Accordeon from "./../../components/Accordeon";
 import Header from "./../../components/Header";
 import Footer from "./../../components/Footer";
 import mockedData from "./../../CatalogMock.js";
+import ListIcon from "./ListIcon";
+import GridIcon from "./GridIcon";
 import Slider from "./../../components/slider";
 
 import "./styles.scss";
@@ -15,15 +17,25 @@ class CatalogPage extends Component {
     productList: mockedData,
     productListCount: [],
     ProductView: ListProduct,
-    sort: "ASC"
+    sort: "ASC",
+    ListFill: "#68d6f4",
+    GridFill: "#dfdfdf"
   };
 
   handleClickGridView = () => {
-    this.setState({ ProductView: GridProduct });
+    this.setState({
+      ProductView: GridProduct,
+      GridFill: "#68d6f4",
+      ListFill: "#dfdfdf"
+    });
   };
 
   handleClickListView = () => {
-    this.setState({ ProductView: ListProduct });
+    this.setState({
+      ProductView: ListProduct,
+      ListFill: "#68d6f4",
+      GridFill: "#dfdfdf"
+    });
   };
 
   handleChangeSort = e => {
@@ -69,14 +81,15 @@ class CatalogPage extends Component {
       <React.Fragment>
         <Header />
         <div className="container">
-          <aside className="left col-md-2">
+          <aside className="left col-md-3">
             <Accordeon>
               {[
                 {
                   title: "Бренд",
                   content: (
                     <>
-                      <br />
+                      {" "}
+                      <br />{" "}
                     </>
                   )
                 },
@@ -84,9 +97,7 @@ class CatalogPage extends Component {
                   title: "Цена",
                   content: (
                     <>
-                      <br />
-                      <br />
-                      <br />
+                      <br /> <br /> <br />{" "}
                     </>
                   )
                 },
@@ -94,12 +105,8 @@ class CatalogPage extends Component {
                   title: "Вид животного",
                   content: (
                     <>
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
+                      {" "}
+                      <br /> <br /> <br /> <br /> <br /> <br />{" "}
                     </>
                   )
                 },
@@ -107,22 +114,16 @@ class CatalogPage extends Component {
                   title: "Возраст животного",
                   content: (
                     <>
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
+                      {" "}
+                      <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />{" "}
+                      <br />{" "}
                     </>
                   )
                 }
               ]}
             </Accordeon>
           </aside>
-          <div className="product row col-md-10">
+          <div className="product row col-md-9">
             <div class="view_product">
               <div className="sort">
                 <select
@@ -136,6 +137,7 @@ class CatalogPage extends Component {
                   className="select_sort select_sort_count"
                   onChange={this.handleChangeSortCount}
                 >
+                  <option value="" default></option>
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -144,18 +146,12 @@ class CatalogPage extends Component {
                 </select>
               </div>
               <div className="view">
-                <button
-                  className="grid_button"
-                  onClick={this.handleClickGridView}
-                >
-                  <img src="image/grid.svg" alt="grid" />
-                </button>
-                <button
-                  className="list_button"
-                  onClick={this.handleClickListView}
-                >
-                  <img src="image/list.svg" alt="list" />
-                </button>
+                <label className="grid" onClick={this.handleClickGridView}>
+                  <GridIcon fill={this.state.GridFill} />
+                </label>
+                <label className="list" onClick={this.handleClickListView}>
+                  <ListIcon fill={this.state.ListFill} />
+                </label>
               </div>
             </div>
             <div className="product row">

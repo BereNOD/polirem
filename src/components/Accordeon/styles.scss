@@ -1,4 +1,15 @@
+.Accordeon .AccordeonItem__wrapper {
+  margin-bottom: 2px;
+  border: none;
+}
+
 .AccordeonItem {
-  border: 1px solid black;
+  box-shadow: 0 4px 11px rgba(0, 0, 0, 0.03), 0 2px 4px rgba(0, 0, 0, 0.06);
   transition: height 0.3s ease;
+  &__title {
+    background-image: url("/image/background_accordeon.svg");
+    height: 50px;
+    color: white;
+    font-weight: 500;
+  }
 }

@@ -21,7 +21,9 @@ class AccordeonItem extends React.Component {
   render = () => {
     return (
       <div className="AccordeonItem__wrapper" onClick={this.handleClick}>
-        <div className="AccordeonItem__title">{this.props.title}</div>
+        <div className="AccordeonItem__title">
+          <span className="AccordeonItem__text">{this.props.title}</span>
+        </div>
         <div
           className="AccordeonItem"
           style={{
