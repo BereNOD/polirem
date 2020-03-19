@@ -6,6 +6,7 @@ import Accordeon from "./../../components/Accordeon";
 import Header from "./../../components/Header";
 import Footer from "./../../components/Footer";
 import mockedData from "./../../CatalogMock.js";
+import Slider from "./../../components/slider";
 
 import "./styles.scss";
 

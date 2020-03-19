@@ -6,6 +6,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Recommendations from "../../components/Recommendations";
 import mockedData from "./../../CatalogMock.js";
+import Slider from "./../../components/slider";
 
 class HomePage extends Component {
   state = {
@@ -13,8 +14,6 @@ class HomePage extends Component {
   };
 
   render = () => {
-    const { productList } = this.state;
-
     return (
       <React.Fragment>
         <Header />
