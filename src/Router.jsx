@@ -9,7 +9,7 @@ const Router = () => (
   <BrowserRouter>
     <Switch>
       <Route path="/" exact>
-        <HomePage />
+        <CatalogPage />
       </Route>
       <Route path="/:id">
         <ProductPage />

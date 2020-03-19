@@ -5,6 +5,8 @@ import { CartContext } from "./../../Cart";
 
 import Radio from "./../Radio";
 
+import "./styles.scss";
+
 class Product extends React.Component {
   state = {
     activeValue: this.props.data.weights[0]
@@ -66,7 +68,7 @@ class Product extends React.Component {
                       height="15"
                     />
                   </div>
-                  <div>
+                  <div className="sale_price">
                     <span className="sale">{data.sale}</span>
                     <img
                       className="image_sale"
