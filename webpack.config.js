@@ -76,14 +76,16 @@ const config = {
     }
   },
   devServer: {
-    contentBase: "./dist"
+    contentBase: "./dist",
+    historyApiFallback: true
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: require("html-webpack-template"),
       inject: false,
       appMountId: "app",
-      filename: "index.html"
+      filename: "index.html",
+      baseHref: "/"
     }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
     new LodashModuleReplacementPlugin(),
@@ -111,6 +113,8 @@ module.exports = (env, argv) => {
   if (argv.hot) {
     // Cannot use 'contenthash' when hot reloading is enabled.
     config.output.filename = "[name].[hash].js";
+
+    config.devtool = "eval-source-map";
   }
 
   return config;
