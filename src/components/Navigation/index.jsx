@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import './styles.scss';
+import "./styles.scss";
 
 class Navigation extends React.Component {
   render() {
@@ -9,7 +9,7 @@ class Navigation extends React.Component {
       <nav className="Navigation">
         <div className="header__bottom">
           <div className="menu-item">
-            <Link to="/cat" className="menu-link">
+            <Link to="/catalog/cat" className="menu-link">
               <img src="image/cat-icon.png" alt="cat" />
               <span className="menu-text" className="menu-text">
                 кошки
@@ -17,31 +17,31 @@ class Navigation extends React.Component {
             </Link>
           </div>
           <div className="menu-item">
-            <Link to="/dog" className="menu-link">
+            <Link to="/catalog/dog" className="menu-link">
               <img src="image/dog-icon.png" alt="dog" />
               <span className="menu-text">собаки</span>
             </Link>
           </div>
           <div className="menu-item">
-            <Link to="/mouse" className="menu-link">
+            <Link to="/catalog/mouse" className="menu-link">
               <img src="image/mouse-icon.png" alt="mouse" />
               <span className="menu-text">грызуны</span>
             </Link>
           </div>
           <div className="menu-item">
-            <Link to="/fish" className="menu-link">
+            <Link to="/catalog/fish" className="menu-link">
               <img src="image/fish-icon.png" alt="fish" />
               <span className="menu-text">рыбы</span>
             </Link>
           </div>
           <div className="menu-item">
-            <Link to="/chicken" className="menu-link">
+            <Link to="/catalog/chicken" className="menu-link">
               <img src="image/chicken-icon.png" alt="bird" />
               <span className="menu-text">птицы</span>
             </Link>
           </div>
           <div className="menu-item">
-            <Link to="/pig" className="menu-link">
+            <Link to="/catalog/pig" className="menu-link">
               <img src="image/pig-icon.png" alt="farm_animal" />
               <span className="menu-text">сельхоз животные</span>
             </Link>

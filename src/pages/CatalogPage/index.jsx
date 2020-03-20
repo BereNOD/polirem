@@ -9,6 +9,8 @@ import mockedData from "./../../CatalogMock.js";
 import ListIcon from "./ListIcon";
 import GridIcon from "./GridIcon";
 import Slider from "./../../components/slider";
+import Breadcrumbs from "./../../components/BreadCrumbs";
+import Greeting from "./../../components/Greeting";
 
 import "./styles.scss";
 
@@ -50,8 +52,6 @@ class CatalogPage extends Component {
       products.push(productList[i]);
     }
 
-    console.log(productList);
-
     this.setState({ productListCount: products });
   };
 
@@ -80,6 +80,11 @@ class CatalogPage extends Component {
     return (
       <React.Fragment>
         <Header />
+        <div className="container container_breadcrumb">
+          <div className="col-md-12">
+            <Breadcrumbs Cat />
+          </div>
+        </div>
         <div className="container">
           <aside className="left col-md-3">
             <Accordeon>
@@ -161,6 +166,8 @@ class CatalogPage extends Component {
             </div>
           </div>
         </div>
+
+        <Greeting />
 
         <Footer />
       </React.Fragment>
