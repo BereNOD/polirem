@@ -14,69 +14,82 @@ import Greeting from "./../../components/Greeting";
 
 import "./styles.scss";
 
+const sortList = [
+  {
+    name: "Сортировка по умолчанию",
+    sorter: (leftItem, rigthItem) => {
+      if (leftItem.id === rigthItem.id) {
+        return 0;
+      }
+      return leftItem.id > rigthItem.id ? 1 : -1;
+    }
+  },
+  {
+    name: "Сортировка по новизне",
+    sorter: (leftItem, rigthItem) => {
+      if (leftItem.id === rigthItem.id) {
+        return 0;
+      }
+      return leftItem.id > rigthItem.id ? -1 : 1;
+    }
+  }
+];
+
+const perPageList = [1, 10, 25, 50, 100];
+
 class CatalogPage extends Component {
   state = {
     productList: mockedData,
-    productListCount: [],
     ProductView: ListProduct,
-    sort: "ASC",
-    ListFill: "#68d6f4",
-    GridFill: "#dfdfdf"
+    sort: 0,
+    perPage: 10,
+    page: 0
+    // ListFill: "#68d6f4",
+    // GridFill: "#dfdfdf"
   };
 
   handleClickGridView = () => {
     this.setState({
-      ProductView: GridProduct,
-      GridFill: "#68d6f4",
-      ListFill: "#dfdfdf"
+      ProductView: GridProduct
+      // GridFill: "#68d6f4",
+      // ListFill: "#dfdfdf"
     });
   };
 
   handleClickListView = () => {
     this.setState({
-      ProductView: ListProduct,
-      ListFill: "#68d6f4",
-      GridFill: "#dfdfdf"
+      ProductView: ListProduct
+      // ListFill: "#68d6f4",
+      // GridFill: "#dfdfdf"
     });
   };
 
   handleChangeSort = e => {
-    this.setState({ sort: e.target.value });
+    this.setState({ sort: +e.target.value });
   };
 
-  handleChangeSortCount = e => {
-    const countProduct = +e.target.value;
-    var products = [];
-    var productList = this.state.productList;
-    for (var i = 0; i < countProduct; i++) {
-      products.push(productList[i]);
-    }
-
-    this.setState({ productListCount: products });
+  handleChangePerPage = e => {
+    this.setState({ perPage: +e.target.value });
   };
 
-  sort = () => {
-    const { sort, productList, productListCount } = this.state;
-
-    switch (sort) {
-      case "ASC":
-        if (productListCount.length === 0) {
-          return productList;
-        } else {
-          return productListCount;
-        }
-      case "DESC":
-        if (productListCount.length === 0) {
-          return productList.reverse();
-        } else {
-          return productListCount.reverse();
-        }
-    }
+  handleCahngePage = e => {
+    this.setState({ page: +e.target.value });
   };
 
   render = () => {
     const { ProductView } = this.state;
-    let productList = this.sort();
+
+    let productList = Array.isArray(this.state.productList)
+      ? this.state.productList
+      : [];
+
+    productList = _.cloneDeep(productList).sort(
+      sortList[this.state.sort].sorter
+    );
+
+    const pages = _.chunk(productList, this.state.perPage);
+    const page = pages[this.state.page];
+
     return (
       <React.Fragment>
         <Header />
@@ -90,7 +103,7 @@ class CatalogPage extends Component {
             <Accordeon>
               {[
                 {
-                  title: "Бренд",
+                  title: <span>Бренд</span>,
                   content: (
                     <>
                       {" "}
@@ -99,15 +112,15 @@ class CatalogPage extends Component {
                   )
                 },
                 {
-                  title: "Цена",
+                  title: <span>Цена</span>,
                   content: (
                     <>
-                      <br /> <br /> <br />{" "}
+                      <Slider min={0} max={255} />
                     </>
                   )
                 },
                 {
-                  title: "Вид животного",
+                  title: <span>Вид животного</span>,
                   content: (
                     <>
                       {" "}
@@ -116,7 +129,7 @@ class CatalogPage extends Component {
                   )
                 },
                 {
-                  title: "Возраст животного",
+                  title: <span>Возраст животного</span>,
                   content: (
                     <>
                       {" "}
@@ -129,41 +142,53 @@ class CatalogPage extends Component {
             </Accordeon>
           </aside>
           <div className="product row col-md-9">
-            <div class="view_product">
+            <div class="container view_product">
               <div className="sort">
                 <select
                   className="select_sort"
                   onChange={this.handleChangeSort}
                 >
-                  <option value="ASC">Сортировка по умолчанию</option>
-                  <option value="DESC">Сортировка по новизне</option>
+                  {_.map(sortList, ({ name }, index) => (
+                    <option value={index} selected={this.state.sort === index}>
+                      {name}
+                    </option>
+                  ))}
                 </select>
                 <select
                   className="select_sort select_sort_count"
-                  onChange={this.handleChangeSortCount}
+                  onChange={this.handleChangePerPage}
                 >
-                  <option value="" default></option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
+                  {_.map(perPageList, perPage => (
+                    <option
+                      value={perPage}
+                      selected={this.state.perPage === perPage}
+                    >
+                      {perPage}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div className="view">
                 <label className="grid" onClick={this.handleClickGridView}>
-                  <GridIcon fill={this.state.GridFill} />
+                  <GridIcon active={ProductView === GridProduct} />
                 </label>
                 <label className="list" onClick={this.handleClickListView}>
-                  <ListIcon fill={this.state.ListFill} />
+                  <ListIcon active={ProductView === ListProduct} />
                 </label>
               </div>
             </div>
             <div className="product row">
-              {_.map(productList, product => (
+              {_.map(page, product => (
                 <ProductView key={`Product-${product.id}`} data={product} />
               ))}
             </div>
+            <nav>
+              {_.map(pages, (_p, index) => (
+                <button value={index} onClick={this.handleCahngePage}>
+                  {index + 1}
+                </button>
+              ))}
+            </nav>
           </div>
         </div>
 

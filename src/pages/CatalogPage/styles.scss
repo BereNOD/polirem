@@ -43,3 +43,14 @@ body .container_breadcrumb {
   cursor: pointer;
   margin: 5px;
 }
+
+.ListIcon,
+.GridIcon {
+  path {
+    fill: #dfdfdf;
+
+    &.active {
+      fill: #68d6f4;
+    }
+  }
+}

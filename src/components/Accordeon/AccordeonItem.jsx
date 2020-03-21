@@ -6,12 +6,14 @@ class AccordeonItem extends React.Component {
   };
 
   meashureRef = node => {
-    if (node) {
-      const height = node.offsetHeight;
-      if (this.state.height !== height) {
-        this.setState({ height });
+    requestAnimationFrame(() => {
+      if (node) {
+        const height = node.offsetHeight;
+        if (this.state.height !== height) {
+          this.setState({ height });
+        }
       }
-    }
+    });
   };
 
   handleClick = () => {
@@ -20,8 +22,8 @@ class AccordeonItem extends React.Component {
 
   render = () => {
     return (
-      <div className="AccordeonItem__wrapper" onClick={this.handleClick}>
-        <div className="AccordeonItem__title">
+      <div className="AccordeonItem__wrapper">
+        <div className="AccordeonItem__title" onClick={this.handleClick}>
           <span className="AccordeonItem__text">{this.props.title}</span>
         </div>
         <div
