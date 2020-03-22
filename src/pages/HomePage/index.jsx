@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import _ from "lodash";
-import ListProduct from "./../../components/ListProduct";
-// import GridProduct from './../../components/GridProduct';
+import ListProducts from "./../../components/ListProducts";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Recommendations from "./../../components/Recommendations";
 import mockedData from "./../../CatalogMock.js";
-import GridProduct from "../../components/GridProduct";
+import GridProducts from "../../components/GridProducts";
 import Slider from "./../../components/slider";
 
 class HomePage extends Component {
@@ -24,7 +23,7 @@ class HomePage extends Component {
         <div className="container">
           <div className="row product">
             {_.map(productList, product => (
-              <GridProduct key={`Product-${product.id}`} data={product} />
+              <GridProducts key={`Product-${product.id}`} data={product} />
             ))}
           </div>
         </div>

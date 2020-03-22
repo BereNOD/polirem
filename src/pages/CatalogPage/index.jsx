@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import _ from "lodash";
-import ListProduct from "./../../components/ListProduct";
-import GridProduct from "./../../components/GridProduct";
+import ListProducts from "./../../components/ListProducts";
+import GridProducts from "./../../components/GridProducts";
 import Accordeon from "./../../components/Accordeon";
 import Header from "./../../components/Header";
 import Footer from "./../../components/Footer";
@@ -40,7 +40,7 @@ const perPageList = [1, 10, 25, 50, 100];
 class CatalogPage extends Component {
   state = {
     productList: mockedData,
-    ProductView: ListProduct,
+    ProductView: ListProducts,
     sort: 0,
     perPage: 10,
     page: 0
@@ -50,7 +50,7 @@ class CatalogPage extends Component {
 
   handleClickGridView = () => {
     this.setState({
-      ProductView: GridProduct
+      ProductView: GridProducts
       // GridFill: "#68d6f4",
       // ListFill: "#dfdfdf"
     });
@@ -58,7 +58,7 @@ class CatalogPage extends Component {
 
   handleClickListView = () => {
     this.setState({
-      ProductView: ListProduct
+      ProductView: ListProducts
       // ListFill: "#68d6f4",
       // GridFill: "#dfdfdf"
     });
@@ -170,10 +170,10 @@ class CatalogPage extends Component {
               </div>
               <div className="view">
                 <label className="grid" onClick={this.handleClickGridView}>
-                  <GridIcon active={ProductView === GridProduct} />
+                  <GridIcon active={ProductView === GridProducts} />
                 </label>
                 <label className="list" onClick={this.handleClickListView}>
-                  <ListIcon active={ProductView === ListProduct} />
+                  <ListIcon active={ProductView === ListProducts} />
                 </label>
               </div>
             </div>
@@ -182,15 +182,16 @@ class CatalogPage extends Component {
                 <ProductView key={`Product-${product.id}`} data={product} />
               ))}
             </div>
-            <nav>
-              {_.map(pages, (_p, index) => (
-                <button value={index} onClick={this.handleCahngePage}>
-                  {index + 1}
-                </button>
-              ))}
-            </nav>
           </div>
         </div>
+
+        <nav className="nav_page">
+          {_.map(pages, (_p, index) => (
+            <button value={index} onClick={this.handleCahngePage}>
+              {index + 1}
+            </button>
+          ))}
+        </nav>
 
         <Greeting />
 

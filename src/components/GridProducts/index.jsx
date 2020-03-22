@@ -1,13 +1,13 @@
 import React from "react";
 import _ from "lodash";
 import { Link } from "react-router-dom";
-import { CartContext } from "./../../Cart";
+import { CartContext } from "../../Cart";
 
-import Radio from "./../Radio";
+import Radio from "../Radio";
 
 import "./styles.scss";
 
-class Product extends React.Component {
+class GridProducts extends React.Component {
   state = {
     activeValue: this.props.data.weights[0]
   };
@@ -40,7 +40,9 @@ class Product extends React.Component {
                 <span>нет в наличии</span>
               )}
             </div>
-            <p className="card-text">{data.title}</p>
+            <Link to="/product">
+              <p className="card-text">{data.title}</p>
+            </Link>
             <div className="row d-flex justify-content-between weight-product">
               {Array.isArray(data.weights)
                 ? _.map(data.weights, weight => (
@@ -100,4 +102,4 @@ class Product extends React.Component {
   }
 }
 
-export default Product;
+export default GridProducts;

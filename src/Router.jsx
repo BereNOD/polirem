@@ -14,9 +14,12 @@ const Router = () => (
       <Route path="/catalog/:categoryKey?">
         <CatalogPage />
       </Route>
-      <Route path="/product/:productId">
+      <Route path="/product">
         <ProductPage />
       </Route>
+      {/* <Route path="/product/:productId">
+        <ProductPage />
+      </Route> */}
     </Switch>
   </BrowserRouter>
 );
