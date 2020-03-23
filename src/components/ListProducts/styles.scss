@@ -27,8 +27,16 @@
   margin-top: 15px;
 }
 
-.card-body p {
+.info_product .card-text {
   padding-left: 0;
+}
+
+.link_title {
+  color: #2b2d36;
+  &:hover {
+    color: #2b2d36;
+    text-decoration: none;
+  }
 }
 
 .info_product .discount,

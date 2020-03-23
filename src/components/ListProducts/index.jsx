@@ -23,7 +23,13 @@ class ListProducts extends React.Component {
         {({ list, addToCart }) => (
           <div className="row no-gutters product_item_list">
             <div className="col-md-2 image_cart">
-              <img src="image/product.png" className="card-img" alt="product" />
+              <Link className="link_title" to="/product">
+                <img
+                  src="image/product.png"
+                  className="card-img"
+                  alt="product"
+                />
+              </Link>
             </div>
             <div className="col-md-10">
               <div className="card-body">
@@ -53,9 +59,11 @@ class ListProducts extends React.Component {
                 </div>
 
                 <div className=" d-flex info_product">
-                  <Link to="/product">
-                    <p className="card-text col-md-7">{data.title}</p>
-                  </Link>
+                  <p className="card-text col-md-7">
+                    <Link className="link_title" to="/product">
+                      {data.title}
+                    </Link>
+                  </p>
                   {data.sale ? (
                     <div className="discount">
                       <div className="price">

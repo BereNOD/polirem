@@ -1,18 +1,19 @@
 import React, { Component } from "react";
 import Header from "./../../components/Header";
 import Footer from "./../../components/Footer";
+import DetailsProduct from "../../components/DetailsProduct";
 import detailsProducts from "./../../detailsProducts.js";
 
-class ProductPage extends Component {
-  state = {
-    products: detailsProducts
-  };
+import "./styles.scss";
 
+class ProductPage extends Component {
   render = () => {
     return (
       <React.Fragment>
         <Header />
-        <h1>ProductPage</h1>
+        <div className="container">
+          <DetailsProduct data={detailsProducts} />
+        </div>
         <Footer />
       </React.Fragment>
     );
