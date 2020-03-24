@@ -1,36 +1,56 @@
 import React from "react";
+import { withRouter } from 'react-router-dom';
 import _ from "lodash";
 import Radio from "./../Radio";
 import { CartContext } from "./../../Cart";
 import ItemDetails from "./../ItemDetails";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 import "./styles.scss";
 
 class DetailsProduct extends React.Component {
   state = {
-    activeValue: this.props.data.details_weights[0],
+    data: null,
+    activeValue: {
+      weight: 0,
+      price: 0,
+      sale: 0
+    },
     counter: 1,
-    price:
-      this.props.data.details_weights[0].price *
-      this.props.data.details_weights[0].weight,
-    sale_price:
-      this.props.data.details_weights[0].sale *
-      this.props.data.details_weights[0].weight
+    price: 0,
+    sale_price: 0
   };
+
+  componentDidMount() {
+    // fetch(`/product/${this.props.match.params.productId}`)
+    //   .then(response => response.json())
+    //   .then(data => {
+    //
+    //     this.setState({
+    //       data,
+    //       activeValue: data.details_weights[0],
+    //       price: data.details_weights[0].price * data.details_weights[0].weight,
+    //       sale_price: data.details_weights[0].sale * data.details_weights[0].weight
+    //     });
+    //   })
+    const { data } = this.props;
+
+    this.setState({
+      data,
+      activeValue: data.details_weights[0],
+      price: data.details_weights[0].price * data.details_weights[0].weight,
+      sale_price: data.details_weights[0].sale * data.details_weights[0].weight
+    });
+  }
 
   handleChange = activeValue => {
     this.setState({ activeValue });
   };
 
-  salePrice = () => {
-    return (
-      +this.state.activeValue.sale *
-      +this.state.counter *
-      +this.state.activeValue.weight
-    );
-  };
+  salePrice = () => +this.state.activeValue.sale *
+    +this.state.counter *
+    +this.state.activeValue.weight;
 
   price = () => {
     return (
@@ -41,23 +61,23 @@ class DetailsProduct extends React.Component {
   };
 
   handleIncrease = () => {
-    this.setState({ counter: ++this.state.counter });
+    this.setState({ counter:  + 1 }, () => {
+      const sale_price = this.salePrice();
+      const price = this.price();
 
-    var sale_price = this.salePrice();
-    var price = this.price();
-
-    this.setState({ price, sale_price });
+      this.setState({ price, sale_price });
+    });
   };
 
   handleDecrease = () => {
     if (this.state.counter > 1) {
-      this.setState({ counter: --this.state.counter });
+      this.setState({ counter: this.state.counter - 1 }, () => {
+        const sale_price = this.salePrice();
+        const price = this.price();
+
+        this.setState({ price, sale_price });
+      });
     }
-
-    var sale_price = this.salePrice();
-    var price = this.price();
-
-    this.setState({ price, sale_price });
   };
 
   handleClickItem = activeValue => {
@@ -146,35 +166,16 @@ class DetailsProduct extends React.Component {
                   )}
                 </div>
                 <div className="weight col-xl-10">
-                  <div className="weight_items">
-                    {Array.isArray(data.details_weights)
-                      ? _.map(data.details_weights, (weight, index) =>
-                          index <= 3 ? (
-                            <ItemDetails
-                              data={data}
-                              weight={weight}
-                              activeValue={this.state.activeValue}
-                              handleChange={this.handleChange}
-                              handleClick={this.handleClickItem}
-                            />
-                          ) : null
-                        )
-                      : null}
-                  </div>
-                  <div className="weight_items">
-                    {Array.isArray(data.details_weights)
-                      ? _.map(data.details_weights, (weight, index) =>
-                          index > 3 && index < 8 ? (
-                            <ItemDetails
-                              data={data}
-                              weight={weight}
-                              activeValue={this.state.activeValue}
-                              handleChange={this.handleChange}
-                              handleClick={this.handleClickItem}
-                            />
-                          ) : null
-                        )
-                      : null}
+                  <div className="weight_items row">
+                    {_.map(data.details_weights, (weight, index) => (
+                      <ItemDetails
+                        data={data}
+                        weight={weight}
+                        activeValue={this.state.activeValue}
+                        handleChange={this.handleChange}
+                        handleClick={this.handleClickItem}
+                      />
+                    ))}
                   </div>
                 </div>
               </div>
@@ -187,11 +188,15 @@ class DetailsProduct extends React.Component {
                 <div className="calculation">
                   <div className="count">
                     <div className="minus" onClick={this.handleDecrease}>
-                      <FontAwesomeIcon className="minus_icon" icon={faMinus} />
+                      {/*
+                        <FontAwesomeIcon className="minus_icon" icon={faMinus} />
+                      */}
                     </div>
                     <div className="count_products">{counter}</div>
                     <div className="plus" onClick={this.handleIncrease}>
-                      <FontAwesomeIcon className="plus_icon" icon={faPlus} />
+                      {/*
+                        <FontAwesomeIcon className="plus_icon" icon={faPlus} />
+                      */}
                     </div>
                   </div>
                 </div>
@@ -204,4 +209,4 @@ class DetailsProduct extends React.Component {
   };
 }
 
-export default DetailsProduct;
+export default withRouter(DetailsProduct);

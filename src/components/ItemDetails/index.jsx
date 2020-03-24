@@ -4,21 +4,37 @@ import Radio from "./../Radio";
 import "./styles.scss";
 
 class ItemDetails extends React.Component {
+  handleChange = () => {
+    this.props.onChange(this.props.value);
+  };
+
+  handleClick = () => {
+    this.props.onClick(this.props.value);
+  };
+
   render = () => {
     const { weight } = this.props;
     return (
       <React.Fragment>
-        <div className="item col-xl-3">
+        <div
+          className={`item col-xl-3${weight === this.props.activeValue ? ' item--checked' : ''}`}
+          onClick={this.handleClick}
+        >
           <div className="radio">
             <Radio
               key={`Radio-${weight}`}
               value={weight}
               activeValue={this.props.activeValue}
-              onChange={this.props.handleChange}
-              onClick={this.props.handleClick}
+              onChange={this.handleChange}
+              onClick={this.handleClick}
             />
-            <span className="weight">{weight.unit}</span>
+            <span className="weight">
+              {weight.weight >= 1
+                ? `${weight.weight}кг`
+                : `${weight.weight * 1000}гр`}
+            </span>
           </div>
+          <span className="item__dots" />
           {weight.sale ? (
             <div className="weight_price sale">{weight.price}р/кг</div>
           ) : (

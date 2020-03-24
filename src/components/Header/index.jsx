@@ -12,6 +12,22 @@ const data = {
 };
 
 class Header extends React.Component {
+  state = {
+    query: '',
+    data: null
+  };
+
+  handleChange = (e) => {
+    console.log(e.currentTarget.value, e.target.value);
+    this.setState({ query: e.currentTarget.value }, () => {
+      fetch(`https://google.com/q=${this.state.query}`)
+        .then(response => response.json())
+        .then(data => {
+          this.setState({ data });
+        });
+    });
+  };
+
   render() {
     return (
       <CartContext.Consumer>
@@ -39,7 +55,12 @@ class Header extends React.Component {
                   </div>
                 </div>
                 <div className="header__search">
-                  <input type="text" placeholder="Поиск по товарам" />
+                  <input
+                    type="text"
+                    placeholder="Поиск по товарам"
+                    value={this.state.query}
+                    onChange={this.handleChange}
+                  />
                   <div className="search">
                     <img
                       className="search-icon"

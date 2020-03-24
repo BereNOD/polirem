@@ -60,7 +60,7 @@ class ListProducts extends React.Component {
 
                 <div className=" d-flex info_product">
                   <p className="card-text col-md-7">
-                    <Link className="link_title" to="/product">
+                    <Link className="link_title" to={`/product/${data.id}`}>
                       {data.title}
                     </Link>
                   </p>

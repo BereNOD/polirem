@@ -40,8 +40,8 @@ class GridProducts extends React.Component {
                 <span>нет в наличии</span>
               )}
             </div>
-            <Link to="/product">
-              <p className="card-text">{data.title}</p>
+            <Link to={`/product/${data.id}`} className="card-text">
+              {data.title}
             </Link>
             <div className="row d-flex justify-content-between weight-product">
               {Array.isArray(data.weights)
