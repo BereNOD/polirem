@@ -134,7 +134,9 @@ class DetailsProduct extends React.Component {
                     </div>
                   ) : (
                     <div class="d-flex align-items-center">
-                      <span className="price_details">{this.state.price}</span>
+                      <span className="price_details price_sum">
+                        {this.state.price}
+                      </span>
                       <img
                         className="image_price"
                         src="image/price_big.svg"
