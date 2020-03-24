@@ -1,0 +1,22 @@
+.item {
+  display: flex;
+  justify-content: space-between;
+  width: 176px;
+  height: 36px;
+  &:hover,
+  &:checked {
+    box-shadow: 0px 7px 11px rgba(0, 0, 0, 0.03),
+      0px 2px 4px rgba(0, 0, 0, 0.06);
+    border-radius: 6px;
+  }
+}
+
+.weight {
+  color: #2b2d36;
+}
+
+.radio,
+.weight_price {
+  margin-top: auto;
+  margin-bottom: auto;
+}

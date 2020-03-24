@@ -8,12 +8,17 @@ class Radio extends React.Component {
     this.props.onChange(this.props.value);
   };
 
+  handleClick = () => {
+    this.props.onClick(this.props.value);
+  };
+
   render = () => (
     <label className="Radio">
       <input
         type="radio"
         checked={this.props.value === this.props.activeValue}
         onChange={this.handleChange}
+        onClick={this.handleClick}
         className="Radio__flag"
         hidden
       />

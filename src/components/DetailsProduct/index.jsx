@@ -1,24 +1,91 @@
 import React from "react";
 import _ from "lodash";
 import Radio from "./../Radio";
+import { CartContext } from "./../../Cart";
+import ItemDetails from "./../ItemDetails";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 import "./styles.scss";
 
 class DetailsProduct extends React.Component {
+  state = {
+    activeValue: this.props.data.details_weights[0],
+    counter: 1,
+    price:
+      this.props.data.details_weights[0].price *
+      this.props.data.details_weights[0].weight,
+    sale_price:
+      this.props.data.details_weights[0].sale *
+      this.props.data.details_weights[0].weight
+  };
+
+  handleChange = activeValue => {
+    this.setState({ activeValue });
+  };
+
+  salePrice = () => {
+    return (
+      +this.state.activeValue.sale *
+      +this.state.counter *
+      +this.state.activeValue.weight
+    );
+  };
+
+  price = () => {
+    return (
+      +this.state.activeValue.price *
+      +this.state.counter *
+      +this.state.activeValue.weight
+    );
+  };
+
+  handleIncrease = () => {
+    this.setState({ counter: ++this.state.counter });
+
+    var sale_price = this.salePrice();
+    var price = this.price();
+
+    this.setState({ price, sale_price });
+  };
+
+  handleDecrease = () => {
+    if (this.state.counter > 1) {
+      this.setState({ counter: --this.state.counter });
+    }
+
+    var sale_price = this.salePrice();
+    var price = this.price();
+
+    this.setState({ price, sale_price });
+  };
+
+  handleClickItem = activeValue => {
+    var sale_price = 0;
+    var price = 0;
+
+    var sale_price =
+      +activeValue.sale * +activeValue.weight * this.state.counter;
+
+    var price = +activeValue.price * +activeValue.weight * this.state.counter;
+
+    this.setState({ price, sale_price });
+  };
+
   render = () => {
     const { data } = this.props;
-    console.log(data);
+    const { counter } = this.state;
 
     return (
-      <React.Fragment>
-        <div className="product">
-          <div className="product_image">
-            <img src="image/details_product.jpg" alt="product" height="250" />
-          </div>
-          <div className="product_info">
-            <div className="title"> {data.title} </div>
-            <div className="rating">
-              <div>
+      <CartContext.Consumer>
+        {({ list, addToCart }) => (
+          <div className="product">
+            <div className="product_image">
+              <img src="image/details_product.jpg" alt="product" height="250" />
+            </div>
+            <div className="product_info">
+              <div className="title"> {data.title} </div>
+              <div className="rating">
                 {data.in_stock ? (
                   <span>
                     <img src="image/check-icon.png" alt="check" />в наличии
@@ -26,90 +93,111 @@ class DetailsProduct extends React.Component {
                 ) : (
                   <span>нет в наличии</span>
                 )}
+                <img
+                  src={`image/rating-${data.rate}.png`}
+                  alt="rating"
+                  height="15"
+                />
+              </div>
+              <div className="delivery">
                 <div>
                   <span>Срок доставки:</span> {data.delivery_period} дней
                 </div>
-              </div>
-              <div>
-                <img src={`image/rating-${data.rate}.png`} alt="rating" />
                 <div>({_.size(data.reviews)} отзыва)</div>
               </div>
-            </div>
-            <div className="price">
-              <div className="col-md-2">
-                {data.sale ? (
-                  <div className="discount">
-                    <div className="price">
-                      <span className="sale_discount">{data.price}</span>
+              <div className="details_product">
+                <div className="col-xl-2 details">
+                  {this.state.activeValue.sale ? (
+                    <div className="discount discount_product">
+                      <div className="price price_details">
+                        <span className="sale_discount_product">
+                          {this.state.sale_price}
+                        </span>
+                        <img
+                          className="image_sale_product"
+                          src="image/discount_price.svg"
+                          alt="sale"
+                          width="15"
+                          height="30"
+                        />
+                      </div>
+                      <div className="sale_price">
+                        <span className="sale sale_product">
+                          {this.state.price}
+                        </span>
+                        <img
+                          className="image_sale"
+                          src="image/sale_big.svg"
+                          alt="sale"
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <div class="d-flex align-items-center">
+                      <span className="price_details">{this.state.price}</span>
                       <img
-                        className="image_sale"
-                        src="image/discount_price.svg"
+                        className="image_price"
+                        src="image/price_big.svg"
                         alt="sale"
-                        width="15"
-                        height="15"
                       />
                     </div>
-                    <div className="sale_price">
-                      <span className="sale">{data.sale}</span>
-                      <img
-                        className="image_sale"
-                        src="image/sale.svg"
-                        alt="sale"
-                      />
-                    </div>
+                  )}
+                </div>
+                <div className="weight col-xl-10">
+                  <div className="weight_items">
+                    {Array.isArray(data.details_weights)
+                      ? _.map(data.details_weights, (weight, index) =>
+                          index <= 3 ? (
+                            <ItemDetails
+                              data={data}
+                              weight={weight}
+                              activeValue={this.state.activeValue}
+                              handleChange={this.handleChange}
+                              handleClick={this.handleClickItem}
+                            />
+                          ) : null
+                        )
+                      : null}
                   </div>
-                ) : (
-                  <div class="d-flex align-items-center cost col-md-2">
-                    <span className="price">{data.price}</span>
-                    <img
-                      className="image_price"
-                      src="image/price.svg"
-                      alt="sale"
-                    />
+                  <div className="weight_items">
+                    {Array.isArray(data.details_weights)
+                      ? _.map(data.details_weights, (weight, index) =>
+                          index > 3 && index < 8 ? (
+                            <ItemDetails
+                              data={data}
+                              weight={weight}
+                              activeValue={this.state.activeValue}
+                              handleChange={this.handleChange}
+                              handleClick={this.handleClickItem}
+                            />
+                          ) : null
+                        )
+                      : null}
                   </div>
-                )}
+                </div>
               </div>
-              <div className="count col-md-10">
-                <div className="item col-md-3">
-                  <div className="radio">
-                    <Radio />
-                    <span>300гр</span>
-                  </div>
-                  <div className="weight">450р/кг</div>
+              <div className="buy_details">
+                <div className="btn-buy">
+                  <button className="btn" onClick={() => addToCart(data)}>
+                    В корзину
+                  </button>
                 </div>
-                <div className="item col-md-3">
-                  <div className="radio">
-                    <Radio />
-                    <span>300гр</span>
+                <div className="calculation">
+                  <div className="count">
+                    <div className="minus" onClick={this.handleDecrease}>
+                      <FontAwesomeIcon className="minus_icon" icon={faMinus} />
+                    </div>
+                    <div className="count_products">{counter}</div>
+                    <div className="plus" onClick={this.handleIncrease}>
+                      <FontAwesomeIcon className="plus_icon" icon={faPlus} />
+                    </div>
                   </div>
-                  <div className="weight">450р/кг</div>
-                </div>
-                <div className="item col-md-3">
-                  <div className="radio">
-                    <Radio />
-                    <span>300гр</span>
-                  </div>
-                  <div className="weight">450р/кг</div>
-                </div>
-                <div className="item col-md-3">
-                  <div className="radio">
-                    <Radio />
-                    <span>300гр</span>
-                  </div>
-                  <div className="weight">450р/кг</div>
-                </div>
-                <div className="item col-md-3">
-                  <div className="radio">
-                    <Radio />
-                    <span>300гр</span>
-                  </div>
-                  <div className="weight">450р/кг</div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </React.Fragment>
+        )}
+      </CartContext.Consumer>
     );
   };
 }

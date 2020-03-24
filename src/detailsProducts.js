@@ -19,12 +19,12 @@ const detailsProducts = {
   title:
     "1Сухой корм Hill's Science Plan Adult Large Breed Lamb & Rice для взрослых собак",
   details_weights: [
-    { weight: "300гр", price: 450, sale: true },
-    { weight: "1кг", price: 430, sale: true },
-    { weight: "2кг", price: 420, sale: false },
-    { weight: "10кг", price: 375, sale: false },
-    { weight: "15кг", price: 350, sale: false },
-    { weight: "20кг", price: 325, sale: false }
+    { weight: "0.3", unit: "300гр", price: 450, sale: 500 },
+    { weight: "1", unit: "1кг", price: 430, sale: 500 },
+    { weight: "2", unit: "2кг", price: 420 },
+    { weight: "10", unit: "10кг", price: 375 },
+    { weight: "15", unit: "15кг", price: 350, sale: 400 },
+    { weight: "20", unit: "20кг", price: 325 }
   ],
   sale: 400,
   price: 450,
