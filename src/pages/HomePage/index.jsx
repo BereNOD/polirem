@@ -23,7 +23,11 @@ class HomePage extends Component {
         <div className="container">
           <div className="row product">
             {_.map(productList, product => (
-              <GridProducts key={`Product-${product.id}`} data={product} />
+              <GridProducts
+                key={`Product-${product.id}`}
+                count="4"
+                data={product}
+              />
             ))}
           </div>
         </div>

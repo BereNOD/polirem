@@ -5,19 +5,23 @@ import "./styles.scss";
 
 class ItemDetails extends React.Component {
   handleChange = () => {
-    this.props.onChange(this.props.value);
+    this.props.onChange(this.props.weight);
   };
 
   handleClick = () => {
-    this.props.onClick(this.props.value);
+    this.props.onClick(this.props.weight);
   };
 
   render = () => {
     const { weight } = this.props;
+
     return (
       <React.Fragment>
         <div
-          className={`item col-xl-3${weight === this.props.activeValue ? ' item--checked' : ''}`}
+          className={`item col-xl-3 ${
+            weight === this.props.activeValue ? " item--checked" : ""
+          }`}
+          onChange={this.handleChange}
           onClick={this.handleClick}
         >
           <div className="radio">
@@ -25,8 +29,8 @@ class ItemDetails extends React.Component {
               key={`Radio-${weight}`}
               value={weight}
               activeValue={this.props.activeValue}
-              onChange={this.handleChange}
-              onClick={this.handleClick}
+              // onChange={this.handleChange}
+              // onClick={this.handleClick}
             />
             <span className="weight">
               {weight.weight >= 1

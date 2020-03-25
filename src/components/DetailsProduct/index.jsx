@@ -1,11 +1,11 @@
 import React from "react";
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 import _ from "lodash";
 import Radio from "./../Radio";
 import { CartContext } from "./../../Cart";
 import ItemDetails from "./../ItemDetails";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 import "./styles.scss";
 
@@ -39,8 +39,12 @@ class DetailsProduct extends React.Component {
     this.setState({
       data,
       activeValue: data.details_weights[0],
-      price: data.details_weights[0].price * data.details_weights[0].weight,
-      sale_price: data.details_weights[0].sale * data.details_weights[0].weight
+      price: (
+        data.details_weights[0].price * data.details_weights[0].weight
+      ).toFixed(0),
+      sale_price: (
+        data.details_weights[0].sale * data.details_weights[0].weight
+      ).toFixed(0)
     });
   }
 
@@ -48,20 +52,22 @@ class DetailsProduct extends React.Component {
     this.setState({ activeValue });
   };
 
-  salePrice = () => +this.state.activeValue.sale *
-    +this.state.counter *
-    +this.state.activeValue.weight;
+  salePrice = () =>
+    (
+      +this.state.activeValue.sale *
+      +this.state.counter *
+      +this.state.activeValue.weight
+    ).toFixed(0);
 
-  price = () => {
-    return (
+  price = () =>
+    (
       +this.state.activeValue.price *
       +this.state.counter *
       +this.state.activeValue.weight
-    );
-  };
+    ).toFixed(0);
 
   handleIncrease = () => {
-    this.setState({ counter:  + 1 }, () => {
+    this.setState({ counter: this.state.counter + 1 }, () => {
       const sale_price = this.salePrice();
       const price = this.price();
 
@@ -84,12 +90,19 @@ class DetailsProduct extends React.Component {
     var sale_price = 0;
     var price = 0;
 
-    var sale_price =
-      +activeValue.sale * +activeValue.weight * this.state.counter;
+    var sale_price = (
+      +activeValue.sale *
+      +activeValue.weight *
+      this.state.counter
+    ).toFixed(0);
 
-    var price = +activeValue.price * +activeValue.weight * this.state.counter;
+    var price = (
+      +activeValue.price *
+      +activeValue.weight *
+      this.state.counter
+    ).toFixed(0);
 
-    this.setState({ price, sale_price });
+    this.setState({ activeValue, price, sale_price });
   };
 
   render = () => {
@@ -172,8 +185,8 @@ class DetailsProduct extends React.Component {
                         data={data}
                         weight={weight}
                         activeValue={this.state.activeValue}
-                        handleChange={this.handleChange}
-                        handleClick={this.handleClickItem}
+                        onChange={this.handleChange}
+                        onClick={this.handleClickItem}
                       />
                     ))}
                   </div>
@@ -188,15 +201,11 @@ class DetailsProduct extends React.Component {
                 <div className="calculation">
                   <div className="count">
                     <div className="minus" onClick={this.handleDecrease}>
-                      {/*
-                        <FontAwesomeIcon className="minus_icon" icon={faMinus} />
-                      */}
+                      <FontAwesomeIcon className="minus_icon" icon={faMinus} />
                     </div>
                     <div className="count_products">{counter}</div>
                     <div className="plus" onClick={this.handleIncrease}>
-                      {/*
-                        <FontAwesomeIcon className="plus_icon" icon={faPlus} />
-                      */}
+                      <FontAwesomeIcon className="plus_icon" icon={faPlus} />
                     </div>
                   </div>
                 </div>
